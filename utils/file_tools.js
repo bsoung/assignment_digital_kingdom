@@ -23,13 +23,12 @@ const newKingdom = (king, queen, kingdomName) => {
 	fs.writeFileSync("./data/kingdoms.json", data, "utf-8");
 }
 
-const newItem = (params, item) => {
+const newCastle = (castleName, kingdomName) => {
 	let data = _readJson();
-	data = JSON.stringify(data, null, 2);
+	
+	data.kingdoms[kingdomName]['castle'][castleName] = {};
 
-	params.forEach((param) => {
-		data[param]
-	});
+	data = JSON.stringify(data, null, 2);
 
 	console.log(data, "data?")
 

@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
+
 const { 
 	kingdomsJson, 
 	diveJson,
 	newKingdom
 } = require("../utils/file_tools");
+
 const castles = require("./castles");
 
 router.get("/", (req, res) => {
@@ -32,6 +34,8 @@ router.post("/", (req, res) => {
 })
 
 router.get("/:kingdomName", (req, res) => {
+	console.log("here??");
+
 	let url = req.originalUrl;
 
 	if (url[url.length - 1] === "/") {
@@ -63,6 +67,12 @@ router.get("/:kingdomName", (req, res) => {
 
 	// res.render(data[0] + "<br><pre>" + data[1] + "</pre>");
 });
+
+router.post("/:kingdomName", (req, res) => {
+	newKingdom(req.body.castle, req.params.kingdomName);
+
+	res.redirect("back");
+})
 
 router.use("/:kingdomName/castles", function(req, res, next) {
 	if (!req.diveArray) {

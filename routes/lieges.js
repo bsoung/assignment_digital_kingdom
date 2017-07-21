@@ -3,6 +3,9 @@ const router = express.Router();
 const { diveJson } = require("../utils/file_tools");
 const vassals = require("./vassals");
 
+//
+const kingdoms = require("./kingdoms");
+
 router.get("/:liege", (req, res) => {
 	let url = req.originalUrl;
 
@@ -32,6 +35,9 @@ router.get("/:liege", (req, res) => {
 router.use("/:liege/vassals", (req, res, next) => {
 	req.diveArray.push('lieges');
 	req.diveArray.push(req.params.liege);
+
+	console.log(typeof vassals, "vassals what is this")
+	console.log(typeof kingdoms, "kingdoms what is this")
 
 	next();
 }, vassals);
